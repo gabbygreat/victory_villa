@@ -1,10 +1,5 @@
-import 'dart:convert';
-
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:victory_villa/model/model.dart';
 
 class TestScreen extends StatefulWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -22,7 +17,7 @@ class _TestScreenState extends State<TestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('test'),
+        title: const Text('test'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -41,12 +36,10 @@ class _TestScreenState extends State<TestScreen> {
                     if (snap.hasData &&
                         !snap.hasError &&
                         snap.data.snapshot.value != null) {
-                      print(snap.data.snapshot.value.runtimeType);
-                      print(snap.data.snapshot.value);
 
-                      return Text('done');
+                      return const Text('done');
                     } else {
-                      return Center(child: Text("No data"));
+                      return const Center(child: Text("No data"));
                     }
                   },
                 ),

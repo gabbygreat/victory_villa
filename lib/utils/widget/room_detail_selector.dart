@@ -34,6 +34,7 @@ class RoomSuite {
   }
 }
 
+// ignore: must_be_immutable
 class RoomDetailSelector extends StatefulWidget {
   final bool searchText;
   final Function()? perform;

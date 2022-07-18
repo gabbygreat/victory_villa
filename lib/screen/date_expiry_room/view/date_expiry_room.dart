@@ -110,7 +110,6 @@ class DateExpiryRoom extends ConsumerWidget {
                 ),
               ),
               error: (e, trace) {
-                print(e);
                 return Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(

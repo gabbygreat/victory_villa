@@ -25,7 +25,6 @@ class GetCalls {
 
   static Future<List<RoomInfo>?> searchForAllRoom(
       {String searchText = '', String type = 'suite'}) async {
-    print(searchText);
     List<RoomInfo>? allRooms = await getAllRooms();
     List<RoomInfo> searchInfo = [];
     if (allRooms == null) return null;
@@ -75,10 +74,7 @@ class GetCalls {
     timeSortedRooms.sort(((a, b) => a
         .occupant!.dateOfRentPayment.millisecondsSinceEpoch
         .compareTo(b.occupant!.dateOfRentPayment.millisecondsSinceEpoch)));
-    print(
-        timeSortedRooms[0].occupant!.dateOfRentPayment.millisecondsSinceEpoch);
-    print(
-        timeSortedRooms[1].occupant!.dateOfRentPayment.millisecondsSinceEpoch);
+    
     return timeSortedRooms;
   }
 }
