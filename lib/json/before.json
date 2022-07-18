@@ -1,0 +1,44 @@
+{
+  "room_details": {
+    "A0001": {
+      "guarantor": {
+        "name": "Chukwumalume Ekene",
+        "phoneNumber": 8035039153
+      },
+      "id": 1,
+      "occupant": {
+        "dateOfOccupancy": "2022-07-16T23:46:09.319974",
+        "dateOfRentPayment": "2022-07-16T23:46:09.319974",
+        "gender": "male",
+        "name": "Oranekwu Gabriel",
+        "phoneNumber": 8034339010,
+        "stateOfOrigin": "Anambra"
+      },
+      "occupied": true
+    },
+    "A0002": {
+      "guarantor": {
+        "name": "Uchechukwu Rita",
+        "phoneNumber": 8052223121
+      },
+      "id": 2,
+      "occupant": {
+        "dateOfOccupancy": "2022-07-18T23:46:09.319974",
+        "dateOfRentPayment": "2022-07-18T23:46:09.319974",
+        "gender": "female",
+        "name": "Uchenna Ifunanya",
+        "phoneNumber": 87080365805,
+        "stateOfOrigin": "Imo"
+      },
+      "occupied": true
+    },
+    "A0003": {
+      "id": 3,
+      "occupied": false
+    },
+    "A0004": {
+      "id": 4,
+      "occupied": false
+    }
+  }
+}

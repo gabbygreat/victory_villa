@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1021689191176",
+    "firebase_url": "https://victoryvilla-default-rtdb.firebaseio.com",
+    "project_id": "victoryvilla",
+    "storage_bucket": "victoryvilla.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021689191176:android:85ce0e70c6a610d2c5aabd",
+        "android_client_info": {
+          "package_name": "com.pycify.victory.victory_villa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021689191176-jejvq7f1fva5a0t2nl83so38jpulfnkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLOedV4pwYNf3bRgRhue3URZb8RLPUqcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021689191176-jejvq7f1fva5a0t2nl83so38jpulfnkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
