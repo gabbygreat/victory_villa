@@ -108,8 +108,8 @@ class AllRoom extends ConsumerWidget {
                   itemCount: value!.length,
                 ),
               ),
-              error: (e, trace) {
-                return Expanded(
+              error: (e, trace) =>
+                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: VictoryConstants.kPadding * 2,
@@ -137,8 +137,7 @@ class AllRoom extends ConsumerWidget {
                       ],
                     ),
                   ),
-                );
-              },
+                ),
               loading: () => const Expanded(
                 child: Center(
                   child: CircularProgressIndicator(),

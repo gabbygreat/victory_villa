@@ -36,7 +36,6 @@ class _TestScreenState extends State<TestScreen> {
                     if (snap.hasData &&
                         !snap.hasError &&
                         snap.data.snapshot.value != null) {
-
                       return const Text('done');
                     } else {
                       return const Center(child: Text("No data"));
