@@ -34,10 +34,24 @@ Map<String, dynamic> mockRoomInfoData = {
       "occupied": true
     },
     {"roomNumber": "A003", "id": 3, "occupied": false},
-    {"roomNumber": "A004", "id": 4, "occupied": false}
+    {"roomNumber": "A004", "id": 4, "occupied": false},
+    {
+      "guarantor": {"name": "Uchechukwu Rita", "phoneNumber": 7034400892},
+      "roomNumber": "A005",
+      "id": 5,
+      "occupant": {
+        "dateOfOccupancy": "2022-06-18T23:46:09.319974",
+        "dateOfRentPayment": "2021-12-18T23:46:09.319974",
+        "gender": "male",
+        "name": "Dozie Emeka",
+        "phoneNumber": 8035039153,
+        "stateOfOrigin": "Abia"
+      },
+      "occupied": true
+    },
   ]
 };
 
 final allRoomProvider = FutureProvider.autoDispose
-    .family<List<RoomInfo>?, String>((_, searchText) async =>
+    .family<List<RoomInfo>?, String?>((_, searchText) async =>
         await GetCalls.searchForAllRoom(searchText: searchText));
