@@ -38,10 +38,10 @@ class RoomSuite {
 class RoomDetailSelector extends StatefulWidget {
   final bool searchText;
   final Function()? perform;
-   String wingIndicator ;
-   String floorIndicator ;
-   String roomIndicator;
-   RoomDetailSelector({
+  String wingIndicator;
+  String floorIndicator;
+  String roomIndicator;
+  RoomDetailSelector({
     Key? key,
     this.searchText = false,
     this.perform,
@@ -57,8 +57,6 @@ class RoomDetailSelector extends StatefulWidget {
 class _RoomDetailSelectorState extends State<RoomDetailSelector> {
   enums.Wing choiceWing = enums.Wing.none;
   enums.Floor choiceFloor = enums.Floor.none;
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +79,8 @@ class _RoomDetailSelectorState extends State<RoomDetailSelector> {
                                     int.tryParse(widget.roomIndicator) == 6 ||
                                     int.tryParse(widget.roomIndicator) == 7 ||
                                     int.tryParse(widget.roomIndicator) == 8 ||
-                                    int.tryParse(widget.roomIndicator) == 9))) ||
+                                    int.tryParse(widget.roomIndicator) ==
+                                        9))) ||
                         (item == enums.Wing.wingA &&
                             int.tryParse(widget.roomIndicator) == 9)) {
                     } else {
@@ -103,8 +102,9 @@ class _RoomDetailSelectorState extends State<RoomDetailSelector> {
                             RoomSuite.wingController.text.substring(5);
                       });
                     }
-                    RoomSuite.roomSuite =
-                        widget.wingIndicator + widget.floorIndicator + widget.roomIndicator;
+                    RoomSuite.roomSuite = widget.wingIndicator +
+                        widget.floorIndicator +
+                        widget.roomIndicator;
                     if (widget.perform != null) {
                       widget.perform!();
                     }
@@ -176,8 +176,9 @@ class _RoomDetailSelectorState extends State<RoomDetailSelector> {
                         default:
                       }
                       choiceFloor = item;
-                      RoomSuite.roomSuite =
-                          widget.wingIndicator + widget.floorIndicator + widget.roomIndicator;
+                      RoomSuite.roomSuite = widget.wingIndicator +
+                          widget.floorIndicator +
+                          widget.roomIndicator;
                       if (widget.perform != null) {
                         widget.perform!();
                       }
@@ -234,14 +235,16 @@ class _RoomDetailSelectorState extends State<RoomDetailSelector> {
                   setState(() {
                     RoomSuite.roomController.text = item.toString();
                     widget.roomIndicator = item.toString().padLeft(2, '0');
-                    RoomSuite.roomSuite =
-                        widget.wingIndicator + widget.floorIndicator + widget.roomIndicator;
+                    RoomSuite.roomSuite = widget.wingIndicator +
+                        widget.floorIndicator +
+                        widget.roomIndicator;
                     if (widget.perform != null) {
                       widget.perform!();
                     }
                   });
-                  RoomSuite.roomSuite =
-                      widget.wingIndicator + widget.floorIndicator + widget.roomIndicator;
+                  RoomSuite.roomSuite = widget.wingIndicator +
+                      widget.floorIndicator +
+                      widget.roomIndicator;
                 },
                 itemBuilder: (BuildContext context) {
                   int popupLength = 0;

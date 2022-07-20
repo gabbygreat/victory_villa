@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:victory_villa/screen/available_room/view/available_room.dart';
+import 'package:victory_villa/screen/unoccupied_room/view/unoccupied_room.dart';
 import 'package:victory_villa/screen/date_expiry_room/view/date_expiry_room.dart';
 import 'package:victory_villa/screen/new_occupant/new_occupant.dart';
 import 'package:victory_villa/screen/all_room/view/all_room.dart';
 import 'package:victory_villa/screen/test_screen.dart';
-import 'package:victory_villa/screen/unavailable_room/view/unavailable_room.dart';
+import 'package:victory_villa/screen/occupied_room/view/occupied_room.dart';
 import 'package:victory_villa/utils/assets.dart';
 import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             assetName: VictoryAssets.availableRoom,
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const AvailableRoom(),
+                builder: (context) => const UnoccupiedRoom(),
               ),
             ),
           ),

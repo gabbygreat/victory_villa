@@ -20,9 +20,7 @@ class RoomDetails extends StatelessWidget {
     int daysLeft = DateTime.now().difference(rentPaidDate).inDays;
     if (daysLeft >= 360) {
       return Colors.red;
-    } else if (daysLeft >= 270) {
-      return Colors.amber;
-    } else if (daysLeft >= 180) {
+    } else if (daysLeft >= 240) {
       return Colors.orange;
     } else {
       return Colors.green;
@@ -98,19 +96,19 @@ class RoomDetails extends StatelessWidget {
               ),
             ],
           ),
-          CustomButton(
-            'Edit ${roomInfo.roomNumber}',
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => EditOccupantScreen(
-                  roomInfo: roomInfo,
-                  gender: roomInfo.occupant!.gender == 'male'
-                      ? enums.Gender.male
-                      : enums.Gender.female,
-                ),
-              ),
-            ),
-          ),
+          // CustomButton(
+          //   'Edit ${roomInfo.roomNumber}',
+          //   onTap: () => Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => EditOccupantScreen(
+          //         roomInfo: roomInfo,
+          //         gender: roomInfo.occupant!.gender == 'male'
+          //             ? enums.Gender.male
+          //             : enums.Gender.female,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -163,19 +161,6 @@ class RoomDetails extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 color: Colors.red == getRentColorIndicator()
                                     ? Colors.red
-                                    : VictoryColor.faintColor,
-                              ),
-                            ),
-                            SizedBox(
-                              width: VictoryConstants.kSpacing,
-                            ),
-                            Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.amber == getRentColorIndicator()
-                                    ? Colors.amber
                                     : VictoryColor.faintColor,
                               ),
                             ),

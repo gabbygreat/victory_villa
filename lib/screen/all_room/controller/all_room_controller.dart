@@ -41,7 +41,7 @@ Map<String, dynamic> mockRoomInfoData = {
       "id": 5,
       "occupant": {
         "dateOfOccupancy": "2022-06-18T23:46:09.319974",
-        "dateOfRentPayment": "2021-12-18T23:46:09.319974",
+        "dateOfRentPayment": "2021-10-18T23:46:09.319974",
         "gender": "male",
         "name": "Dozie Emeka",
         "phoneNumber": 8035039153,

@@ -10,6 +10,7 @@ import 'package:victory_villa/utils/constants.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
 import 'package:victory_villa/utils/widget/horizontal_line.dart';
 import 'package:victory_villa/utils/widget/no_network.dart';
+import 'package:victory_villa/utils/widget/piechart.dart';
 
 class OccupancyStatus extends ConsumerWidget {
   const OccupancyStatus({Key? key}) : super(key: key);
@@ -74,9 +75,10 @@ class OccupancyStatus extends ConsumerWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      horizontalLine(showText: false),
+                      // horizontalLine(showText: false),
                       Card(
                         elevation: 0,
+                        color: Colors.transparent,
                         child: Padding(
                           padding: EdgeInsets.all(VictoryConstants.kPadding),
                           child: Text(
@@ -129,6 +131,15 @@ class OccupancyStatus extends ConsumerWidget {
                             ),
                           ),
                         ),
+                      ),
+                      horizontalLine(showText: false),
+                      SizedBox(
+                        height: VictoryConstants.kSpacing * 3,
+                      ),
+                      VictoryPieChart(
+                        all: totalRoom.toDouble(),
+                        occupied: occupiedRoom.toDouble(),
+                        unoccupied: unoccupiedRoom.toDouble(),
                       ),
                     ],
                   ),
