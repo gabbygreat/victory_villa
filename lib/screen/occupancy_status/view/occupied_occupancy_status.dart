@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:victory_villa/model/model.dart';
 import 'package:victory_villa/screen/room_details/room_details.dart';
+import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
 
-class AvailableOccupancyStatus extends StatelessWidget {
+class OccupiedOccupancyStatus extends StatelessWidget {
   final List<RoomInfo> availableroomInfo;
-  const AvailableOccupancyStatus({Key? key, required this.availableroomInfo})
+  const OccupiedOccupancyStatus({Key? key, required this.availableroomInfo})
       : super(key: key);
 
   @override
@@ -59,7 +60,7 @@ class AvailableOccupancyStatus extends StatelessWidget {
                       Center(
                         child: Icon(
                           Icons.check_circle,
-                          color: roomInfo.occupied ? Colors.green : Colors.red,
+                          color: VictoryColor.green,
                         ),
                       ),
                       onTap: () => Navigator.of(context).push(

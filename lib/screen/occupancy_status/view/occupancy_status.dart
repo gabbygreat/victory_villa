@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:victory_villa/model/model.dart';
 import 'package:victory_villa/screen/all_room/controller/all_room_controller.dart';
-import 'package:victory_villa/screen/occupancy_status/view/available_occupancy_status.dart';
+import 'package:victory_villa/screen/occupancy_status/view/occupied_occupancy_status.dart';
 import 'package:victory_villa/screen/occupancy_status/view/all_occupancy_status.dart';
-import 'package:victory_villa/screen/occupancy_status/view/unavailable_occupancy_status.dart';
+import 'package:victory_villa/screen/occupancy_status/view/unoccupied_occupancy_status.dart';
 import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
@@ -106,11 +106,11 @@ class OccupancyStatus extends ConsumerWidget {
                         height: VictoryConstants.kSpacing * 0.6,
                       ),
                       infoCard(
-                        'Available rooms',
+                        'Occupied rooms',
                         occupiedRoom,
                         () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AvailableOccupancyStatus(
+                            builder: (context) => OccupiedOccupancyStatus(
                               availableroomInfo: value,
                             ),
                           ),
@@ -120,11 +120,11 @@ class OccupancyStatus extends ConsumerWidget {
                         height: VictoryConstants.kSpacing * 0.6,
                       ),
                       infoCard(
-                        'Unavailable rooms',
+                        'Unoccupied rooms',
                         unoccupiedRoom,
                         () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => UnavailableOccupancyStatus(
+                            builder: (context) => UnoccupiedOccupancyStatus(
                               unavailableroomInfo: value,
                             ),
                           ),

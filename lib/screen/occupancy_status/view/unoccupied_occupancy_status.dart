@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:victory_villa/model/model.dart';
+import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
 import 'package:victory_villa/utils/show_toast.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
 
-class UnavailableOccupancyStatus extends StatelessWidget {
+class UnoccupiedOccupancyStatus extends StatelessWidget {
   final List<RoomInfo> unavailableroomInfo;
-  const UnavailableOccupancyStatus(
-      {Key? key, required this.unavailableroomInfo})
+  const UnoccupiedOccupancyStatus({Key? key, required this.unavailableroomInfo})
       : super(key: key);
 
   @override
@@ -34,31 +34,31 @@ class UnavailableOccupancyStatus extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold))),
             ],
-            rows: replica.map(
-              (RoomInfo roomInfo) {
-                return DataRow(
-                  cells: [
-                    DataCell(
-                      Text(roomInfo.id.toString()),
-                      onTap: () => showToast('Room is currently unoccupied'),
-                    ),
-                    DataCell(
-                      Text(roomInfo.roomNumber),
-                      onTap: () => showToast('Room is currently unoccupied'),
-                    ),
-                    DataCell(
-                      Center(
-                        child: Icon(
-                          Icons.check_circle,
-                          color: roomInfo.occupied ? Colors.green : Colors.red,
-                        ),
+            rows: replica
+                .map(
+                  (RoomInfo roomInfo) => DataRow(
+                    cells: [
+                      DataCell(
+                        Text(roomInfo.id.toString()),
+                        onTap: () => showToast('Room is currently unoccupied'),
                       ),
-                      onTap: () => showToast('Room is currently unoccupied'),
-                    ),
-                  ],
-                );
-              },
-            ).toList(),
+                      DataCell(
+                        Text(roomInfo.roomNumber),
+                        onTap: () => showToast('Room is currently unoccupied'),
+                      ),
+                      DataCell(
+                        Center(
+                          child: Icon(
+                            Icons.check_circle,
+                            color: VictoryColor.faintColor,
+                          ),
+                        ),
+                        onTap: () => showToast('Room is currently unoccupied'),
+                      ),
+                    ],
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),

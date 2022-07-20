@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
         title: VictoryConstants.name,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: VictoryColor.primarySwatch,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.white,
             elevation: 0,

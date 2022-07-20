@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:victory_villa/model/model.dart';
 import 'package:victory_villa/screen/room_details/room_details.dart';
+import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
 import 'package:victory_villa/utils/show_toast.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
@@ -66,8 +67,9 @@ class AllOccupancyStatus extends StatelessWidget {
                         Center(
                           child: Icon(
                             Icons.check_circle,
-                            color:
-                                roomInfo.occupied ? Colors.green : Colors.red,
+                            color: roomInfo.occupied
+                                ? VictoryColor.green
+                                : VictoryColor.faintColor,
                           ),
                         ), onTap: () {
                       if (roomInfo.occupied) {
