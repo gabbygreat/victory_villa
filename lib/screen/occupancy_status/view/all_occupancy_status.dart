@@ -19,25 +19,32 @@ class AllOccupancyStatus extends StatelessWidget {
         padding: EdgeInsets.all(VictoryConstants.kPadding),
         children: [
           DataTable(
-            columns: const [
+            columns:  [
               DataColumn(
                   label: Text('Room',
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold))),
+                          fontSize: 18, fontWeight: FontWeight.bold, color: VictoryColor.primaryColor))),
               DataColumn(
                   label: Text('Suite',
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold))),
+                          fontSize: 18, fontWeight: FontWeight.bold, color: VictoryColor.primaryColor))),
               DataColumn(
                   label: Text('Status',
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold))),
+                          fontSize: 18, fontWeight: FontWeight.bold, color: VictoryColor.primaryColor))),
             ],
             rows: roomInfo.map(
               (RoomInfo roomInfo) {
                 return DataRow(
                   cells: [
-                    DataCell(Text(roomInfo.id.toString()), onTap: () {
+                    DataCell(
+                        Text(
+                          roomInfo.id.toString(),
+                          style: TextStyle(
+                            color: VictoryColor.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ), onTap: () {
                       if (roomInfo.occupied) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -50,7 +57,14 @@ class AllOccupancyStatus extends StatelessWidget {
                         showToast('Room is currently unoccupied');
                       }
                     }),
-                    DataCell(Text(roomInfo.roomNumber), onTap: () {
+                    DataCell(
+                        Text(
+                          roomInfo.roomNumber,
+                          style: TextStyle(
+                            color: VictoryColor.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ), onTap: () {
                       if (roomInfo.occupied) {
                         Navigator.of(context).push(
                           MaterialPageRoute(

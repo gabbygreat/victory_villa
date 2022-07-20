@@ -18,26 +18,30 @@ class OccupiedOccupancyStatus extends StatelessWidget {
       body: ListView(
         children: [
           DataTable(
-            columns: const [
+            columns:  [
               DataColumn(
                   label: Text('Room',
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold))),
+                          fontSize: 18, fontWeight: FontWeight.bold, color: VictoryColor.primaryColor))),
               DataColumn(
                   label: Text('Suite',
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold))),
+                          fontSize: 18, fontWeight: FontWeight.bold, color: VictoryColor.primaryColor))),
               DataColumn(
                   label: Text('Status',
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold))),
+                          fontSize: 18, fontWeight: FontWeight.bold, color: VictoryColor.primaryColor))),
             ],
             rows: replica.map(
               (RoomInfo roomInfo) {
                 return DataRow(
                   cells: [
                     DataCell(
-                      Text(roomInfo.id.toString()),
+                      Text(roomInfo.id.toString(),
+                          style: TextStyle(
+                            color: VictoryColor.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => RoomDetails(
@@ -47,7 +51,11 @@ class OccupiedOccupancyStatus extends StatelessWidget {
                       ),
                     ),
                     DataCell(
-                      Text(roomInfo.roomNumber),
+                      Text(roomInfo.roomNumber,
+                          style: TextStyle(
+                            color: VictoryColor.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => RoomDetails(
