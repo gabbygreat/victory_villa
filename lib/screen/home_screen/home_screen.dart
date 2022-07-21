@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(title: VictoryConstants.name),
       drawer: const CustomDrawer(),
+      backgroundColor: Colors.white70.withOpacity(0.8),
       body: GridView.count(
         crossAxisCount: 2,
         padding: EdgeInsets.only(
