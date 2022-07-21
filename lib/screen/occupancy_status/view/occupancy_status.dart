@@ -136,8 +136,7 @@ class OccupancyStatus extends ConsumerWidget {
                       SizedBox(
                         height: VictoryConstants.kSpacing * 3,
                       ),
-                      VictoryPieChart(
-                        all: totalRoom.toDouble(),
+                      OccupancyChart(
                         occupied: occupiedRoom.toDouble(),
                         unoccupied: unoccupiedRoom.toDouble(),
                       ),

@@ -1,40 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
-import 'package:victory_villa/utils/widget/horizontal_line.dart';
-import 'package:victory_villa/utils/widget/search_box/search_box_controller.dart';
 import 'package:victory_villa/utils/widget/text_field.dart';
 
-class SearchBox extends ConsumerWidget {
+class SearchBox extends StatefulWidget {
   const SearchBox({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final searchbox = ref.watch(searchBoxProvider);
-    // print(searchbox);
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-            right: VictoryConstants.kPadding,
-            top: VictoryConstants.kPadding * 0.5,
+  State<SearchBox> createState() => _SearchBoxState();
+}
+
+class _SearchBoxState extends State<SearchBox> {
+  String searchText = 'Room Number';
+  IconData choiceIcon = Icons.pin;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(VictoryConstants.kPadding),
+      child: Row(
+        children: [
+          Flexible(
+            flex: 5,
+            child: TextField(
+              decoration: customInputDecoration(
+                prefixIcon: const Icon(Icons.search),
+                hint: 'Search by $searchText',
+              ),
+            ),
           ),
-          child: SizedBox(
-            height: 40,
-            width: MediaQuery.of(context).size.width * 0.75,
+          SizedBox(
+            width: VictoryConstants.kSpacing * 0.5,
+          ),
+          Flexible(
             child: PopupMenuButton<String>(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              onSelected: (item) {
-                ref.watch(searchBoxProvider.notifier).changeBox(item);
+              onSelected: (String item) {
+                setState(() {
+                  switch (item) {
+                    case 'name':
+                      searchText = 'Occupant Name';
+                      choiceIcon = Icons.person;
+                      break;
+                    case 'room':
+                      searchText = 'Room Number';
+                      choiceIcon = Icons.pin;
+                      break;
+                    case 'suite':
+                      searchText = 'Suite Number';
+                      choiceIcon = Icons.door_front_door;
+                      break;
+                    default:
+                  }
+                });
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
-                  value: 'suite',
+                  value: 'room',
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    'Room suite',
+                    'Room number',
                     style: TextStyle(color: VictoryColor.primaryColor),
                   ),
                 ),
@@ -42,38 +67,52 @@ class SearchBox extends ConsumerWidget {
                   value: 'name',
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    'Occupant / Guarantor name',
+                    'Occupant Name',
                     style: TextStyle(color: VictoryColor.primaryColor),
                   ),
                 ),
                 PopupMenuItem<String>(
-                  value: 'number',
+                  value: 'suite',
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    'Room number',
+                    'Suite Number',
                     style: TextStyle(color: VictoryColor.primaryColor),
                   ),
                 ),
               ],
-              child: TextField(
-                enabled: false,
-                decoration: customInputDecoration(
-                  suffixIcon: const Icon(Icons.arrow_drop_down),
-                  prefixIcon: const Icon(Icons.search),
-                  hint: 'Search by',
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.grey.withOpacity(.3),
+                    ),
+                    bottom: BorderSide(
+                      color: Colors.grey.withOpacity(.3),
+                    ),
+                    left: BorderSide(
+                      color: Colors.grey.withOpacity(.3),
+                    ),
+                    right: BorderSide(
+                      color: Colors.grey.withOpacity(.3),
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(choiceIcon, color: Colors.grey.withOpacity(.9)),
+                    Icon(Icons.arrow_drop_down,
+                        color: Colors.grey.withOpacity(.9)),
+                  ],
                 ),
               ),
             ),
           ),
-        ),
-        horizontalLine(showText: false),
-        Padding(
-          padding: EdgeInsets.all(VictoryConstants.kPadding),
-          child: SizedBox(
-            child: searchbox,
-          ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

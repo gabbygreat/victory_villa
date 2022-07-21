@@ -23,15 +23,13 @@ class GetCalls {
     return roomInfoList;
   }
 
-  static Future<List<RoomInfo>?> searchForAllRoom(
-      {String? searchText, String type = 'suite'}) async {
+  static Future<List<RoomInfo>?> searchForAllRoom({String? searchText}) async {
     List<RoomInfo>? allRooms = await getAllRooms();
     List<RoomInfo> searchInfo = [];
     if (allRooms == null) return null;
     if (searchText == null) return allRooms;
     for (RoomInfo roomInfo in allRooms) {
       if (roomInfo.roomNumber.contains(searchText)) {
-        debugPrint('This : ${roomInfo.toJson()}');
         searchInfo.add(roomInfo);
       }
     }

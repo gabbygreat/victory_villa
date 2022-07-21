@@ -79,13 +79,13 @@ class CustomDrawer extends StatelessWidget {
                           );
                         }),
                     DrawerListTile(
-                      text: 'Tenants\' Details',
-                      icon: Icons.info,
+                      text: 'Financial Status',
+                      icon: Icons.payments,
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const TenancyDetails(),
+                            builder: (context) => const FinancialStatus(),
                           ),
                         );
                       },

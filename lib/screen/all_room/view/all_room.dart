@@ -21,7 +21,14 @@ class AllRoom extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<RoomInfo>?> state = ref.watch(allRoomProvider(''));
+    final AsyncValue<List<RoomInfo>?> state = ref.watch(allRoomProvider(null));
+
+    // ref.listen<AsyncValue<List<RoomInfo>?>>(
+    //     allRoomProvider('').select((user) => user),
+    //     (AsyncValue<List<RoomInfo>?>? previousName,
+    //         AsyncValue<List<RoomInfo>?> newName) {
+    //   print('The user name changed $newName');
+    // });
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
