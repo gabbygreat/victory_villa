@@ -39,8 +39,8 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   fluttertoast: ^8.0.9
   intl: ^0.17.0
-  firebase_database: ^9.0.19
-  firebase_core: ^1.19.2
+  # firebase_database: ^9.0.19
+  # firebase_core: ^1.19.2
   pie_chart: ^5.3.2
 
 dev_dependencies:

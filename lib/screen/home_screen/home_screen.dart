@@ -20,63 +20,70 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(title: VictoryConstants.name),
       drawer: const CustomDrawer(),
-      backgroundColor: Colors.white70.withOpacity(0.8),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.only(
-          top: VictoryConstants.kPadding * 2,
-          left: VictoryConstants.kPadding * 0.6,
-          right: VictoryConstants.kPadding * 0.6,
-        ),
-        crossAxisSpacing: VictoryConstants.kSpacing * 0.3,
-        mainAxisSpacing: VictoryConstants.kSpacing * 0.3,
+      // backgroundColor: const Color.fromARGB(235, 229, 227, 227),
+      body: Column(
         children: [
-          HomeCard(
-            assetName: VictoryAssets.addUser,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => NewOccupantScreen(),
+          SizedBox(height: VictoryConstants.kSpacing,),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              padding: EdgeInsets.only(
+                top: VictoryConstants.kPadding * 2,
+                left: VictoryConstants.kPadding * 0.6,
+                right: VictoryConstants.kPadding * 0.6,
               ),
-            ),
-          ),
-          HomeCard(
-            assetName: VictoryAssets.room,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AllRoom(),
-              ),
-            ),
-          ),
-          HomeCard(
-            assetName: VictoryAssets.availableRoom,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const UnoccupiedRoom(),
-              ),
-            ),
-          ),
-          HomeCard(
-            assetName: VictoryAssets.unavailableRoom,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const UnavailableRoom(),
-              ),
-            ),
-          ),
-          HomeCard(
-            assetName: VictoryAssets.search,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const TestScreen(),
-              ),
-            ),
-          ),
-          HomeCard(
-            assetName: VictoryAssets.calendar,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const DateExpiryRoom(),
-              ),
+              crossAxisSpacing: VictoryConstants.kSpacing * 0.3,
+              mainAxisSpacing: VictoryConstants.kSpacing * 0.3,
+              children: [
+                HomeCard(
+                  assetName: VictoryAssets.addUser,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NewOccupantScreen(),
+                    ),
+                  ),
+                ),
+                HomeCard(
+                  assetName: VictoryAssets.room,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AllRoom(),
+                    ),
+                  ),
+                ),
+                HomeCard(
+                  assetName: VictoryAssets.availableRoom,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const UnoccupiedRoom(),
+                    ),
+                  ),
+                ),
+                HomeCard(
+                  assetName: VictoryAssets.unavailableRoom,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const UnavailableRoom(),
+                    ),
+                  ),
+                ),
+                HomeCard(
+                  assetName: VictoryAssets.search,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TestScreen(),
+                    ),
+                  ),
+                ),
+                HomeCard(
+                  assetName: VictoryAssets.calendar,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DateExpiryRoom(),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
