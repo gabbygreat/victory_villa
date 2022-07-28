@@ -38,7 +38,7 @@ class Occupant {
   final String gender;
   final int phoneNumber;
   final String stateOfOrigin;
-  final DateTime dateOfOccupancy;
+  // final DateTime dateOfOccupancy;
   final DateTime dateOfRentPayment;
 
   Occupant({
@@ -46,7 +46,7 @@ class Occupant {
     required this.gender,
     required this.phoneNumber,
     required this.stateOfOrigin,
-    required this.dateOfOccupancy,
+    // required this.dateOfOccupancy,
     required this.dateOfRentPayment,
   });
   Map<String, dynamic> toJson() => {
@@ -54,7 +54,7 @@ class Occupant {
         'gender': gender,
         'phoneNumber': phoneNumber,
         'stateOfOrigin': stateOfOrigin,
-        'dateOfOccupancy': dateOfOccupancy.toIso8601String(),
+        // 'dateOfOccupancy': dateOfOccupancy.toIso8601String(),
         'dateOfRentPayment': dateOfRentPayment.toIso8601String(),
       };
 
@@ -63,7 +63,7 @@ class Occupant {
         gender: occupantData['gender'],
         phoneNumber: occupantData['phoneNumber'],
         stateOfOrigin: occupantData['stateOfOrigin'],
-        dateOfOccupancy: DateTime.parse(occupantData['dateOfOccupancy']),
+        // dateOfOccupancy: DateTime.parse(occupantData['dateOfOccupancy']),
         dateOfRentPayment: DateTime.parse(occupantData['dateOfRentPayment']),
       );
 }

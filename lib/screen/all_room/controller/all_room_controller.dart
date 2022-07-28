@@ -564,18 +564,7 @@ Map<String, dynamic> mockRoomInfoData = {
   ]
 };
 
-final allRoomProvider = FutureProvider.autoDispose.family<List<RoomInfo>?, String?>(
-    (_, searchText) async => await GetCalls.searchForAllRoom(searchText: searchText));
+final allRoomProvider = FutureProvider.autoDispose
+    .family<List<RoomInfo>?, String?>((_, searchText) async =>
+        await GetCalls.searchForAllRoom(searchText: searchText));
 
-// final diplayedTimerProvider =
-//     Provider<StateProvider<AsyncValue<List<RoomInfo>?>>>((ref) {
-//   final _diplayedTimer = StateProvider<AsyncValue<List<RoomInfo>?>>((ref) {
-//     return const AsyncLoading();
-//   });
-//   ref.listen(allRoomProvider, (previous, next) {
-//     if (next is AsyncData<List<RoomInfo>?>) {
-//       ref.read(_diplayedTimer.state).update((state) => next);
-//     }
-//   });
-//   return _diplayedTimer;
-// });

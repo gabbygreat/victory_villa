@@ -23,7 +23,34 @@ class HomeScreen extends StatelessWidget {
       // backgroundColor: const Color.fromARGB(235, 229, 227, 227),
       body: Column(
         children: [
-          SizedBox(height: VictoryConstants.kSpacing,),
+          Container(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            height: 60,
+            decoration: BoxDecoration(
+              color: VictoryColor.primaryColor,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Logged In: Supervisor',
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                Icon(
+                  Icons.person,
+                  color: VictoryColor.white,
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,

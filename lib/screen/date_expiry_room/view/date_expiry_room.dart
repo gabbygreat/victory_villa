@@ -30,16 +30,22 @@ class DateExpiryRoom extends ConsumerWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const SearchBox(),           
             state.when(
               data: (value) => Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return SearchCard(
-                      roomInfo: value![index],
-                    );
-                  },
-                  itemCount: value!.length,
+                child: Column(
+                  children: [
+                    SearchBox(enabled: false,roomInfoList: value,),
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return SearchCard(
+                            roomInfo: value![index],
+                          );
+                        },
+                        itemCount: value!.length,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               error: (e, trace) {

@@ -36,7 +36,7 @@ class NewOccupantScreen extends StatelessWidget {
       gender: gender,
       phoneNumber: _occupantPhone,
       stateOfOrigin: stateOfOrigin,
-      dateOfOccupancy: DateTime.now(),
+      // dateOfOccupancy: DateTime.now(),
       dateOfRentPayment: DateTime.now(),
     );
 

@@ -1,26 +1,56 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:victory_villa/model/model.dart';
-import 'package:victory_villa/screen/all_room/controller/all_room_controller.dart';
+import 'package:http/http.dart' as http;
 
-const String baseUrl = '';
+const String baseUrl = 'http://10.0.2.2:8000/api';
 
 class PostCalls {
-  static Future<bool> addHotelOccupant(RoomInfo roomInfo) async {
+  static Future<bool?> addHotelOccupant(RoomInfo roomInfo) async {
+    Uri addHotelOccupantUrl = Uri.parse('$baseUrl/roominfo');
+
     Map<String, dynamic> jsonifiedRoomInfo = roomInfo.toJson();
-    debugPrint(jsonifiedRoomInfo.toString());
-    return true;
+    final encodedData = jsonEncode(jsonifiedRoomInfo);
+    try {
+      final sendRequest = await http.post(
+        addHotelOccupantUrl,
+        body: encodedData,
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (sendRequest.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 }
 
 class GetCalls {
   static Future<List<RoomInfo>?> getAllRooms() async {
-    await Future.delayed(const Duration(seconds: 1));
-    final responseList =
-        mockRoomInfoData['room_details'] as List<Map<String, dynamic>>;
-    List<RoomInfo> roomInfoList = [];
-    roomInfoList = responseList.map((e) => RoomInfo.fromJson(e)).toList();
+    Uri getAllRoomsUri = Uri.parse('$baseUrl/roominfo');
 
-    return roomInfoList;
+    try {
+      final sendRequest = await http.get(getAllRoomsUri);
+
+      if (sendRequest.statusCode == 200) {
+        final List responseList = jsonDecode(sendRequest.body)['data'] as List;
+        List<RoomInfo> roomInfoList =
+            responseList.map((e) => RoomInfo.fromJson(e)).toList();
+
+        return roomInfoList;
+      }
+      return null;
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 
   static Future<List<RoomInfo>?> searchForAllRoom({String? searchText}) async {
