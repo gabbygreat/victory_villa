@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:victory_villa/screen/expense/view/new_expense.dart';
+import 'package:victory_villa/screen/expense/new_expense.dart';
 import 'package:victory_villa/screen/financial_status/view/financial_status.dart';
 import 'package:victory_villa/screen/new_occupant/new_occupant.dart';
 import 'package:victory_villa/screen/occupancy_status/occupancy_status.dart';
@@ -65,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
                           Navigator.pop(context);
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>  NewOccupantScreen(),
+                              builder: (context) => NewOccupantScreen(),
                             ),
                           );
                         }),
@@ -132,7 +132,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '© 2022',
+                      'gabbygreat © 2022',
                       style: TextStyle(
                         color: VictoryColor.faintColor,
                         fontWeight: FontWeight.w700,

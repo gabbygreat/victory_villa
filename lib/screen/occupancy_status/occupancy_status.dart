@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:victory_villa/model/model.dart';
 import 'package:victory_villa/screen/all_room/controller/all_room_controller.dart';
 import 'package:victory_villa/screen/occupancy_status/occupied_occupancy_status.dart';
 import 'package:victory_villa/screen/occupancy_status/all_occupancy_status.dart';
 import 'package:victory_villa/screen/occupancy_status/unoccupied_occupancy_status.dart';
+import 'package:victory_villa/utils/assets.dart';
 import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
@@ -60,92 +62,130 @@ class OccupancyStatus extends ConsumerWidget {
         children: [
           state.when(
             data: (value) {
-              int totalRoom = value!.length;
+              int totalRoom = 0;
               int occupiedRoom = 0;
               int unoccupiedRoom = 0;
-              for (RoomInfo roomInfo in value) {
-                if (roomInfo.occupied) {
-                  occupiedRoom++;
-                } else {
-                  unoccupiedRoom++;
+              if (value != null) {
+                totalRoom = value.length;
+                for (RoomInfo roomInfo in value) {
+                  if (roomInfo.occupied) {
+                    occupiedRoom++;
+                  } else {
+                    unoccupiedRoom++;
+                  }
                 }
               }
-              return Padding(
-                padding: EdgeInsets.all(VictoryConstants.kPadding),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // horizontalLine(showText: false),
-                      Card(
-                        elevation: 0,
-                        color: Colors.transparent,
-                        child: Padding(
-                          padding: EdgeInsets.all(VictoryConstants.kPadding),
-                          child: Text(
-                            'All information about the occupant of a room will be shown here',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: VictoryColor.primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+
+              return value == null
+                  ? Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: VictoryConstants.kPadding * 2,
+                        ),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: SvgPicture.asset(VictoryAssets.network),
                             ),
-                          ),
+                            GestureDetector(
+                              onTap: () {
+                                ref.refresh(allRoomProvider(null));
+                              },
+                              child: Text(
+                                'RETRY\n',
+                                style: TextStyle(
+                                  color: VictoryColor.faintColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                  decorationStyle: TextDecorationStyle.dashed,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      horizontalLine(showText: false),
-                      infoCard(
-                        'All rooms',
-                        totalRoom,
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => AllOccupancyStatus(
-                              roomInfo: value,
+                    )
+                  : Padding(
+                      padding: EdgeInsets.all(VictoryConstants.kPadding),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // horizontalLine(showText: false),
+                            Card(
+                              elevation: 0,
+                              color: Colors.transparent,
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.all(VictoryConstants.kPadding),
+                                child: Text(
+                                  'All information about the occupant of a room will be shown here',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: VictoryColor.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            horizontalLine(showText: false),
+                            infoCard(
+                              'All rooms',
+                              totalRoom,
+                              () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => AllOccupancyStatus(
+                                    roomInfo: value,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: VictoryConstants.kSpacing * 0.6,
+                            ),
+                            infoCard(
+                              'Occupied rooms',
+                              occupiedRoom,
+                              () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => OccupiedOccupancyStatus(
+                                    availableroomInfo: value,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: VictoryConstants.kSpacing * 0.6,
+                            ),
+                            infoCard(
+                              'Unoccupied rooms',
+                              unoccupiedRoom,
+                              () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      UnoccupiedOccupancyStatus(
+                                    unavailableroomInfo: value,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            horizontalLine(showText: false),
+                            SizedBox(
+                              height: VictoryConstants.kSpacing * 3,
+                            ),
+                            OccupancyChart(
+                              occupied: occupiedRoom.toDouble(),
+                              unoccupied: unoccupiedRoom.toDouble(),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: VictoryConstants.kSpacing * 0.6,
-                      ),
-                      infoCard(
-                        'Occupied rooms',
-                        occupiedRoom,
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => OccupiedOccupancyStatus(
-                              availableroomInfo: value,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: VictoryConstants.kSpacing * 0.6,
-                      ),
-                      infoCard(
-                        'Unoccupied rooms',
-                        unoccupiedRoom,
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => UnoccupiedOccupancyStatus(
-                              unavailableroomInfo: value,
-                            ),
-                          ),
-                        ),
-                      ),
-                      horizontalLine(showText: false),
-                      SizedBox(
-                        height: VictoryConstants.kSpacing * 3,
-                      ),
-                      OccupancyChart(
-                        occupied: occupiedRoom.toDouble(),
-                        unoccupied: unoccupiedRoom.toDouble(),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+                    );
             },
-            error: (e, trace) => const NoInternet(),
+            error: (e, trace) => NoInternet(
+              onTap: () => ref.refresh(allRoomProvider(null)),
+            ),
             loading: () => const Expanded(
               child: Center(
                 child: CircularProgressIndicator(),

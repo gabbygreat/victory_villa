@@ -37,31 +37,33 @@ class FinancialStatus extends ConsumerWidget {
               }
 
               return value == null
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: VictoryConstants.kPadding * 2,
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: SvgPicture.asset(VictoryAssets.network),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              //ref.refresh(allRoomProvider('A'));
-                            },
-                            child: Text(
-                              'RETRY\n',
-                              style: TextStyle(
-                                color: VictoryColor.faintColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                                decorationStyle: TextDecorationStyle.dashed,
-                                decoration: TextDecoration.underline,
+                  ? Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: VictoryConstants.kPadding * 2,
+                        ),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: SvgPicture.asset(VictoryAssets.network),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                ref.refresh(financialStatusProvider);
+                              },
+                              child: Text(
+                                'RETRY\n',
+                                style: TextStyle(
+                                  color: VictoryColor.faintColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                  decorationStyle: TextDecorationStyle.dashed,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     )
                   : Padding(
@@ -189,7 +191,7 @@ class FinancialStatus extends ConsumerWidget {
                       ),
                     );
             },
-            error: (e, trace) => const NoInternet(),
+            error: (e, trace) =>  NoInternet(onTap: ()=>ref.refresh(financialStatusProvider),),
             loading: () => const Expanded(
               child: Center(
                 child: CircularProgressIndicator(),
@@ -200,125 +202,4 @@ class FinancialStatus extends ConsumerWidget {
       ),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: customAppBar(title: 'Financial Details'),
-  //     body: Padding(
-  //       padding: EdgeInsets.only(
-  //         left: VictoryConstants.kPadding,
-  //         top: VictoryConstants.kPadding,
-  //         right: VictoryConstants.kPadding,
-  //       ),
-  //       child: Column(
-  //         children: [
-  //           SizedBox(
-  //             height: VictoryConstants.kSpacing * 3,
-  //           ),
-  //           const FinanceChart(
-  //             income: 1000000,
-  //             expenditure: 200000,
-  //           ),
-  //           SizedBox(
-  //             height: VictoryConstants.kSpacing * 3,
-  //           ),
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             children: [
-  //               Expanded(
-  //                 child: Card(
-  //                   child: InkWell(
-  //                     onTap: () => Navigator.of(context).push(
-  //                       MaterialPageRoute(
-  //                         builder: (context) => const Income(),
-  //                       ),
-  //                     ),
-  //                     child: Column(
-  //                       children: [
-  //                         SvgPicture.asset(
-  //                           VictoryAssets.income,
-  //                           width: 100,
-  //                           height: 100,
-  //                           color: VictoryColor.green,
-  //                         ),
-  //                         Text(
-  //                           '₦ ${getCurrency(1000000)}',
-  //                           style: TextStyle(
-  //                             color: VictoryColor.green,
-  //                             fontWeight: FontWeight.bold,
-  //                             fontSize: 20,
-  //                           ),
-  //                         ),
-  //                         SizedBox(
-  //                           height: VictoryConstants.kSpacing * 0.8,
-  //                         ),
-  //                         Padding(
-  //                           padding: EdgeInsets.only(
-  //                               bottom: VictoryConstants.kSpacing),
-  //                           child: Text(
-  //                             'Tap to view analysis',
-  //                             style: TextStyle(
-  //                               color: VictoryColor.faintColor,
-  //                               fontSize: 12,
-  //                               fontWeight: FontWeight.bold,
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: Card(
-  //                   child: InkWell(
-  //                     onTap: () => Navigator.of(context).push(
-  //                       MaterialPageRoute(
-  //                         builder: (context) => const Expense(),
-  //                       ),
-  //                     ),
-  //                     child: Column(
-  //                       children: [
-  //                         SvgPicture.asset(
-  //                           VictoryAssets.expense,
-  //                           width: 100,
-  //                           height: 100,
-  //                           color: VictoryColor.red,
-  //                         ),
-  //                         Text(
-  //                           '₦ ${getCurrency(200000)}',
-  //                           style: TextStyle(
-  //                             color: VictoryColor.red,
-  //                             fontWeight: FontWeight.bold,
-  //                             fontSize: 20,
-  //                           ),
-  //                         ),
-  //                         SizedBox(
-  //                           height: VictoryConstants.kSpacing * 0.8,
-  //                         ),
-  //                         Padding(
-  //                           padding: EdgeInsets.only(
-  //                               bottom: VictoryConstants.kSpacing),
-  //                           child: Text(
-  //                             'Tap to view analysis',
-  //                             style: TextStyle(
-  //                               color: VictoryColor.faintColor,
-  //                               fontSize: 12,
-  //                               fontWeight: FontWeight.bold,
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
       appBar: customAppBar(title: VictoryConstants.name),
       backgroundColor: const Color.fromARGB(255, 215, 219, 236),
       drawer: const CustomDrawer(),
-      // backgroundColor: const Color.fromARGB(235, 229, 227, 227),
       body: Column(
         children: [
           Container(
@@ -30,27 +29,6 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: VictoryColor.primaryColor,
             ),
-            // child: Row(
-            //   crossAxisAlignment: CrossAxisAlignment.end,
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     const Text(
-            //       'Logged In: Supervisor',
-            //       textAlign: TextAlign.end,
-            //       style: TextStyle(
-            //         fontFamily: 'Cairo',
-            //         color: Colors.white,
-            //         fontSize: 18,
-            //         fontWeight: FontWeight.bold,
-            //         letterSpacing: 0.5,
-            //       ),
-            //     ),
-            //     Icon(
-            //       Icons.person,
-            //       color: VictoryColor.white,
-            //     ),
-            //   ],
-            // ),
           ),
           Expanded(
             child: GridView.count(

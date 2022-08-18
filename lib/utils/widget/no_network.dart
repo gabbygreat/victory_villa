@@ -5,7 +5,8 @@ import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
 
 class NoInternet extends StatelessWidget {
-  const NoInternet({Key? key}) : super(key: key);
+  final Function()? onTap;
+  const NoInternet({Key? key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class NoInternet extends StatelessWidget {
               child: SvgPicture.asset(VictoryAssets.network),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: onTap,
               child: Text(
                 'RETRY\n',
                 style: TextStyle(

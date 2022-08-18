@@ -7,6 +7,8 @@ import 'package:victory_villa/utils/assets.dart';
 import 'package:victory_villa/utils/colors.dart';
 import 'package:victory_villa/utils/constants.dart';
 import 'package:victory_villa/utils/widget/app_bar.dart';
+import 'package:victory_villa/utils/widget/no_content.dart';
+import 'package:victory_villa/utils/widget/no_network.dart';
 import 'package:victory_villa/utils/widget/search_box/search_box.dart';
 import 'package:victory_villa/utils/widget/search_card.dart';
 
@@ -44,7 +46,7 @@ class AllRoom extends ConsumerWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      //ref.refresh(allRoomProvider('A'));
+                                      ref.refresh(allRoomProvider(null));
                                     },
                                     child: Text(
                                       'RETRY\n',
@@ -70,69 +72,14 @@ class AllRoom extends ConsumerWidget {
                                   },
                                   itemCount: value.length,
                                 )
-                              : Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: VictoryConstants.kPadding * 2,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        child: SvgPicture.asset(
-                                            VictoryAssets.empty),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          //ref.refresh(dateExpiryRoomController);
-                                        },
-                                        child: Text(
-                                          'No Content Found\n',
-                                          style: TextStyle(
-                                            color: VictoryColor.faintColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 30,
-                                            decorationStyle:
-                                                TextDecorationStyle.dashed,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              : const NoContent(),
                     ),
                   ],
                 ),
               );
             },
-            error: (e, trace) => Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: VictoryConstants.kPadding * 2,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SvgPicture.asset(VictoryAssets.network),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        //ref.refresh(allRoomProvider('A'));
-                      },
-                      child: Text(
-                        'RETRY\n',
-                        style: TextStyle(
-                          color: VictoryColor.faintColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          decorationStyle: TextDecorationStyle.dashed,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            error: (e, trace) => NoInternet(
+              onTap: () => ref.refresh(allRoomProvider(null)),
             ),
             loading: () => const Expanded(
               child: Center(
