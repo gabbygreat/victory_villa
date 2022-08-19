@@ -3,5 +3,5 @@ class VictoryConstants {
   static double kSpacing = 20.0;
   static String motto = 'In God we trust';
   static String name = 'Victory Villa';
-  static double houseRent = 150000;
+  static double houseRent = 250000;
 }

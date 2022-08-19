@@ -37,12 +37,13 @@ class TenancyStatus extends ConsumerWidget {
         children: [
           state.when(
             data: (value) {
-              final List<RoomInfo> replica = [];
+              List<RoomInfo> replicaRow = [];
               double high = 0;
               double middle = 0;
               double low = 0;
               if (value != null) {
                 final replica = value.toList();
+
                 replica.removeWhere((room) => room.occupied == false);
                 replica.sort(((a, b) => a
                     .occupant!.dateOfRentPayment.millisecondsSinceEpoch
@@ -63,6 +64,7 @@ class TenancyStatus extends ConsumerWidget {
                     low++;
                   }
                 }
+                replicaRow = replica.toList();
               }
 
               return Expanded(
@@ -165,7 +167,7 @@ class TenancyStatus extends ConsumerWidget {
                                                 color: VictoryColor
                                                     .primaryColor))),
                                   ],
-                                  rows: replica.map(
+                                  rows: replicaRow.map(
                                     (RoomInfo roomInfo) {
                                       return DataRow(
                                         cells: [
