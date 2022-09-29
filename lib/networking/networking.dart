@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:victory_villa/model/model.dart';
 import 'package:http/http.dart' as http;
 
@@ -663,53 +662,42 @@ class GetCalls {
   static Future<Map<String, List>?> getFinancialStatus() async {
     Uri getAllExpenses = Uri.parse('$baseUrl/api/expense');
 
-    try {
-      final sendRequest = await http.get(getAllExpenses);
+    final sendRequest = await http.get(getAllExpenses);
 
-      if (sendRequest.statusCode == 200) {
-        final List responseList = jsonDecode(sendRequest.body)['data'] as List;
-        List<ExpenseModel> expenseList = [];
-        expenseList =
-            responseList.map((e) => ExpenseModel.fromJson(e)).toList();
+    if (sendRequest.statusCode == 200) {
+      final List responseList = jsonDecode(sendRequest.body)['data'] as List;
+      List<ExpenseModel> expenseList = [];
+      expenseList = responseList.map((e) => ExpenseModel.fromJson(e)).toList();
 
-        List<RoomInfo>? allRooms = await GetCalls.getAllRooms();
-        List<RoomInfo> income = [];
-        if (allRooms == null) return null;
-        for (RoomInfo roomInfo in allRooms) {
-          if (roomInfo.occupied == true) {
-            income.add(roomInfo);
-          }
+      List<RoomInfo>? allRooms = await GetCalls.getAllRooms();
+      List<RoomInfo> income = [];
+      if (allRooms == null) return null;
+      for (RoomInfo roomInfo in allRooms) {
+        if (roomInfo.occupied == true) {
+          income.add(roomInfo);
         }
-        return {
-          'income': income,
-          'expense': expenseList,
-        };
       }
-      return null;
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
+      return {
+        'income': income,
+        'expense': expenseList,
+      };
     }
+    return null;
   }
 
   static Future<List<RoomInfo>?> getAllRooms() async {
     Uri getAllRoomsUri = Uri.parse('$baseUrl/api/rooms');
 
-    try {
-      final sendRequest = await http.get(getAllRoomsUri);
+    final sendRequest = await http.get(getAllRoomsUri);
 
-      if (sendRequest.statusCode == 200) {
-        final List responseList = jsonDecode(sendRequest.body)['data'] as List;
-        List<RoomInfo> roomInfoList =
-            responseList.map((e) => RoomInfo.fromJson(e)).toList();
+    if (sendRequest.statusCode == 200) {
+      final List responseList = jsonDecode(sendRequest.body)['data'] as List;
+      List<RoomInfo> roomInfoList =
+          responseList.map((e) => RoomInfo.fromJson(e)).toList();
 
-        return roomInfoList;
-      }
-      return null;
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
+      return roomInfoList;
     }
+    return null;
   }
 
   static Future<List<RoomInfo>?> searchForAllRoom({String? searchText}) async {

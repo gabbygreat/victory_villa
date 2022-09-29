@@ -168,7 +168,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
 
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter name';
+                    return 'Please enter a reason';
                   }
 
                   return null;

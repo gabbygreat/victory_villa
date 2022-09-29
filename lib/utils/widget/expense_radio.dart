@@ -20,103 +20,106 @@ class _ExpenseRadioState extends State<ExpenseRadio> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Radio<enums.ExpenseType>(
-              value: enums.ExpenseType.utility,
-              groupValue: _expenseValue,
-              onChanged: (value) {
-                setState(
-                  () {
-                    _expenseValue = value!;
-                    widget.valueChanged(value);
-                  },
-                );
-              },
-            ),
-            GestureDetector(
-              onTap: () => setState(
-                () {
-                  _expenseValue = enums.ExpenseType.utility;
-                  widget.valueChanged(enums.ExpenseType.utility);
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Radio<enums.ExpenseType>(
+                value: enums.ExpenseType.utility,
+                groupValue: _expenseValue,
+                onChanged: (value) {
+                  setState(
+                    () {
+                      _expenseValue = value!;
+                      widget.valueChanged(value);
+                    },
+                  );
                 },
               ),
-              child: Text(
-                'Utility',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: VictoryColor.faintColor,
+              GestureDetector(
+                onTap: () => setState(
+                  () {
+                    _expenseValue = enums.ExpenseType.utility;
+                    widget.valueChanged(enums.ExpenseType.utility);
+                  },
+                ),
+                child: Text(
+                  'Utility',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: VictoryColor.faintColor,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Radio<enums.ExpenseType>(
-              value: enums.ExpenseType.maintenance,
-              groupValue: _expenseValue,
-              onChanged: (value) {
-                setState(
-                  () {
-                    _expenseValue = value!;
-                    widget.valueChanged(value);
-                  },
-                );
-              },
-            ),
-            GestureDetector(
-              onTap: () => setState(
-                () {
-                  _expenseValue = enums.ExpenseType.maintenance;
-                  widget.valueChanged(enums.ExpenseType.maintenance);
+            ],
+          ),
+          Row(
+            children: [
+              Radio<enums.ExpenseType>(
+                value: enums.ExpenseType.maintenance,
+                groupValue: _expenseValue,
+                onChanged: (value) {
+                  setState(
+                    () {
+                      _expenseValue = value!;
+                      widget.valueChanged(value);
+                    },
+                  );
                 },
               ),
-              child: Text(
-                'Maintenace',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: VictoryColor.faintColor,
+              GestureDetector(
+                onTap: () => setState(
+                  () {
+                    _expenseValue = enums.ExpenseType.maintenance;
+                    widget.valueChanged(enums.ExpenseType.maintenance);
+                  },
+                ),
+                child: Text(
+                  'Maintenace',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: VictoryColor.faintColor,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Radio<enums.ExpenseType>(
-              value: enums.ExpenseType.management,
-              groupValue: _expenseValue,
-              onChanged: (value) {
-                setState(
-                  () {
-                    _expenseValue = value!;
-                    widget.valueChanged(value);
-                  },
-                );
-              },
-            ),
-            GestureDetector(
-              onTap: () => setState(
-                () {
-                  _expenseValue = enums.ExpenseType.management;
-                  widget.valueChanged(enums.ExpenseType.management);
+            ],
+          ),
+          Row(
+            children: [
+              Radio<enums.ExpenseType>(
+                value: enums.ExpenseType.management,
+                groupValue: _expenseValue,
+                onChanged: (value) {
+                  setState(
+                    () {
+                      _expenseValue = value!;
+                      widget.valueChanged(value);
+                    },
+                  );
                 },
               ),
-              child: Text(
-                'Management',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: VictoryColor.faintColor,
+              GestureDetector(
+                onTap: () => setState(
+                  () {
+                    _expenseValue = enums.ExpenseType.management;
+                    widget.valueChanged(enums.ExpenseType.management);
+                  },
+                ),
+                child: Text(
+                  'Management',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: VictoryColor.faintColor,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
