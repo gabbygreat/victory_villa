@@ -33,14 +33,12 @@ class NewOccupantScreen extends StatelessWidget {
     required String guarantorName,
     required String guarantorPhone,
   }) async {
-    int _occupantPhone = int.parse(occupantPhone);
-    int _guarantorPhone = int.parse(guarantorPhone);
     String _suiteNumber = RoomSuite.roomSuite;
 
     Occupant occupant = Occupant(
       name: occupantName,
       gender: gender,
-      phoneNumber: _occupantPhone,
+      phoneNumber: occupantPhone,
       stateOfOrigin: stateOfOrigin,
       // dateOfOccupancy: DateTime.now(),
       dateOfRentPayment: DateTime.now(),
@@ -48,7 +46,7 @@ class NewOccupantScreen extends StatelessWidget {
 
     Guarantor guarantor = Guarantor(
       name: guarantorName,
-      phoneNumber: _guarantorPhone,
+      phoneNumber: guarantorPhone,
     );
 
     RoomInfo roomInfo = RoomInfo(

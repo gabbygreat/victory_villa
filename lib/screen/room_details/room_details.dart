@@ -49,7 +49,7 @@ class RoomDetails extends StatelessWidget {
               cardInfo(
                 leftIcon: Icons.phone,
                 text:
-                    roomInfo.occupant!.phoneNumber.toString().padLeft(11, '0'),
+                    roomInfo.occupant!.phoneNumber,
               ),
               cardInfo(
                 leftIcon: Icons.location_searching,
@@ -74,7 +74,7 @@ class RoomDetails extends StatelessWidget {
               cardInfo(
                 leftIcon: Icons.phone,
                 text:
-                    roomInfo.guarantor!.phoneNumber.toString().padLeft(11, '0'),
+                    roomInfo.guarantor!.phoneNumber.toString(),
               ),
             ],
           ),

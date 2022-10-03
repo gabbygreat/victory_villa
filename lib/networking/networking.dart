@@ -11,7 +11,7 @@ class PostCalls {
     Map<String, dynamic> jsonifiedRoomInfo = roomInfo.toJson();
     final encodedData = jsonEncode(jsonifiedRoomInfo);
     try {
-      final sendRequest = await http.post(
+      final sendRequest = await http.put(
         addHotelOccupantUrl,
         body: encodedData,
         headers: {
@@ -694,6 +694,7 @@ class GetCalls {
       final List responseList = jsonDecode(sendRequest.body)['data'] as List;
       List<RoomInfo> roomInfoList =
           responseList.map((e) => RoomInfo.fromJson(e)).toList();
+      roomInfoList.sort((a, b) => a.id.compareTo(b.id));
 
       return roomInfoList;
     }
@@ -722,6 +723,7 @@ class GetCalls {
         availableRooms.add(roomInfo);
       }
     }
+    availableRooms.sort((a, b) => a.id.compareTo(b.id));
     return availableRooms;
   }
 
@@ -734,6 +736,7 @@ class GetCalls {
         unavailableRooms.add(roomInfo);
       }
     }
+    unavailableRooms.sort((a, b) => a.id.compareTo(b.id));
     return unavailableRooms;
   }
 
@@ -750,7 +753,6 @@ class GetCalls {
     timeSortedRooms.sort(((a, b) => a
         .occupant!.dateOfRentPayment.millisecondsSinceEpoch
         .compareTo(b.occupant!.dateOfRentPayment.millisecondsSinceEpoch)));
-
     return timeSortedRooms;
   }
 }

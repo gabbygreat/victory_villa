@@ -38,7 +38,7 @@ class RoomInfo {
 class Occupant {
   final String name;
   final String gender;
-  final int phoneNumber;
+  final String phoneNumber;
   final String stateOfOrigin;
   // final DateTime dateOfOccupancy;
   final DateTime dateOfRentPayment;
@@ -72,7 +72,7 @@ class Occupant {
 
 class Guarantor {
   final String name;
-  final int phoneNumber;
+  final String phoneNumber;
 
   Guarantor({
     required this.name,

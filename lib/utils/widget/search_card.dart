@@ -56,9 +56,7 @@ class SearchCard extends StatelessWidget {
               if (roomInfo.occupant != null)
                 cardInfo(
                   leftIcon: Icons.phone,
-                  text: roomInfo.occupant!.phoneNumber
-                      .toString()
-                      .padLeft(11, '0'),
+                  text: roomInfo.occupant!.phoneNumber,
                 ),
               if (roomInfo.occupant != null)
                 cardInfo(
