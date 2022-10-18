@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:victory_villa/model/model.dart';
 import 'package:victory_villa/screen/financial_status/controller/financial_status_controller.dart';
 import 'package:victory_villa/screen/financial_status/view/expense.dart';
 import 'package:victory_villa/screen/financial_status/view/income.dart';
@@ -28,8 +29,10 @@ class FinancialStatus extends ConsumerWidget {
               double expense = 0;
               double income = 0;
               if (value != null) {
-                income = (VictoryConstants.houseRent * value['income']!.length)
-                    .toDouble();
+                final test = value['income'] as List<RoomInfo>;
+                for (RoomInfo roomInfo in test) {
+                  income += roomInfo.price!;
+                }
 
                 for (var i in value['expense']) {
                   expense += i.amount;
@@ -191,7 +194,9 @@ class FinancialStatus extends ConsumerWidget {
                       ),
                     );
             },
-            error: (e, trace) =>  NoInternet(onTap: ()=>ref.refresh(financialStatusProvider),),
+            error: (e, trace) => NoInternet(
+              onTap: () => ref.refresh(financialStatusProvider),
+            ),
             loading: () => const Expanded(
               child: Center(
                 child: CircularProgressIndicator(),

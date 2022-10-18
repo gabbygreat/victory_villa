@@ -4,12 +4,14 @@ class RoomInfo {
   final int id;
   final String roomNumber;
   final bool occupied;
+  final int? price;
   final Occupant? occupant;
   final Guarantor? guarantor;
   RoomInfo({
     required this.id,
     required this.roomNumber,
     required this.occupied,
+    this.price,
     required this.occupant,
     required this.guarantor,
   });
@@ -26,6 +28,7 @@ class RoomInfo {
         id: roomInfoData['id'],
         roomNumber: roomInfoData['roomNumber'],
         occupied: roomInfoData['occupied'],
+        price: roomInfoData['price'],
         occupant: roomInfoData['occupant'] != null
             ? Occupant.fromJson(roomInfoData['occupant'])
             : null,

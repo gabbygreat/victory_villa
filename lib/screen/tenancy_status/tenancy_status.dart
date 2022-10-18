@@ -110,7 +110,7 @@ class TenancyStatus extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Expired Rooms: ${low.toInt()} Rooms',
+                                    'Expired Rooms: ${high.toInt()} Rooms',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: VictoryColor.primaryColor,
@@ -126,7 +126,7 @@ class TenancyStatus extends ConsumerWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Safe Rooms: ${high.toInt()} Rooms',
+                                    'Safe Rooms: ${low.toInt()} Rooms',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: VictoryColor.primaryColor,

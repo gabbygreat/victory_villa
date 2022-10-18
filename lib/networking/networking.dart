@@ -10,25 +10,41 @@ class PostCalls {
     Uri addHotelOccupantUrl = Uri.parse('$baseUrl/api/rooms/${roomInfo.id}');
     Map<String, dynamic> jsonifiedRoomInfo = roomInfo.toJson();
     final encodedData = jsonEncode(jsonifiedRoomInfo);
-    try {
-      final sendRequest = await http.put(
-        addHotelOccupantUrl,
-        body: encodedData,
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-      if (sendRequest.statusCode == 200) {
-        final response = jsonDecode(sendRequest.body);
-        if (response['flag']) {
-          return true;
-        } else {
-          return false;
-        }
+    final sendRequest = await http.put(
+      addHotelOccupantUrl,
+      body: encodedData,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (sendRequest.statusCode == 200) {
+      final response = jsonDecode(sendRequest.body);
+      if (response['flag']) {
+        return true;
       } else {
-        return null;
+        return false;
       }
-    } catch (e) {
+    } else {
+      return null;
+    }
+  }
+
+  static Future<bool?> removeHotelOccupant(int roomId) async {
+    Uri addHotelOccupantUrl = Uri.parse('$baseUrl/api/clear/$roomId');
+    final sendRequest = await http.put(
+      addHotelOccupantUrl,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (sendRequest.statusCode == 200) {
+      final response = jsonDecode(sendRequest.body);
+      if (response['flag']) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return null;
     }
   }
@@ -37,25 +53,22 @@ class PostCalls {
     Uri addExpenseUrl = Uri.parse('$baseUrl/api/expense');
     Map<String, dynamic> jsonifiedExpense = expense.toJson();
     final encodedData = jsonEncode(jsonifiedExpense);
-    try {
-      final sendRequest = await http.post(
-        addExpenseUrl,
-        body: encodedData,
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-      if (sendRequest.statusCode == 200) {
-        final response = jsonDecode(sendRequest.body);
-        if (response['flag']) {
-          return true;
-        } else {
-          return false;
-        }
+
+    final sendRequest = await http.post(
+      addExpenseUrl,
+      body: encodedData,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (sendRequest.statusCode == 200) {
+      final response = jsonDecode(sendRequest.body);
+      if (response['flag']) {
+        return true;
       } else {
-        return null;
+        return false;
       }
-    } catch (e) {
+    } else {
       return null;
     }
   }

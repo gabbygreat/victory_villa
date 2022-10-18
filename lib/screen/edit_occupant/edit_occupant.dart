@@ -31,6 +31,7 @@ class EditOccupantScreen extends StatelessWidget {
     required String occupantName,
     required String occupantPhone,
     required String stateOfOrigin,
+    required DateTime dateOfRentPayment,
     required String gender,
     required String guarantorName,
     required String guarantorPhone,
@@ -43,7 +44,7 @@ class EditOccupantScreen extends StatelessWidget {
       phoneNumber: occupantPhone,
       stateOfOrigin: stateOfOrigin,
       // dateOfOccupancy: DateTime.now(),
-      dateOfRentPayment: DateTime.now(),
+      dateOfRentPayment: dateOfRentPayment,
     );
 
     Guarantor guarantor = Guarantor(
@@ -121,6 +122,72 @@ class EditOccupantScreen extends StatelessWidget {
     canExit = true;
   }
 
+  removeOccupant(BuildContext context) async {
+    canExit = false;
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => WillPopScope(
+        onWillPop: onWillPop,
+        child: SimpleDialog(
+          children: [
+            Center(
+              child: Text(
+                'Processing...',
+                style: TextStyle(
+                  color: VictoryColor.primaryColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: VictoryConstants.kSpacing * 3,
+            ),
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: SvgPicture.asset(
+                VictoryAssets.icon,
+                color: VictoryColor.primaryColor,
+              ),
+            ),
+            const VictoryLoader(),
+          ],
+        ),
+      ),
+    );
+
+    final removeOccupant = await PostCalls.removeHotelOccupant(roomInfo.id);
+    if (removeOccupant != null) {
+      if (removeOccupant) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text('Successful'),
+          backgroundColor: VictoryColor.green,
+        ));
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text('Failed'),
+          backgroundColor: VictoryColor.red,
+        ));
+        Navigator.of(context).pop();
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text('Something went wrong'),
+        backgroundColor: VictoryColor.red,
+      ));
+      Navigator.of(context).pop();
+    }
+
+    Navigator.of(context).pop();
+    canExit = true;
+  }
+
   Future<bool> onWillPop() async {
     // RoomSuite.dispose();
     if (canExit) {
@@ -136,9 +203,9 @@ class EditOccupantScreen extends StatelessWidget {
     RoomSuite.stateOfOriginController.text = roomInfo.occupant!.stateOfOrigin;
     RoomSuite.guarantorNameController.text = roomInfo.guarantor!.name;
     RoomSuite.occupantPhoneController.text =
-        '0' + roomInfo.occupant!.phoneNumber.toString();
+        roomInfo.occupant!.phoneNumber.toString();
     RoomSuite.guarantorPhoneController.text =
-        '0' + roomInfo.guarantor!.phoneNumber.toString();
+        roomInfo.guarantor!.phoneNumber.toString();
     RoomSuite.roomSuite = roomInfo.roomNumber.substring(0, 1) +
         roomInfo.roomNumber.substring(1, 2) +
         roomInfo.roomNumber.substring(2, 4);
@@ -277,30 +344,84 @@ class EditOccupantScreen extends StatelessWidget {
               SizedBox(
                 height: VictoryConstants.kSpacing * 2.5,
               ),
-              CustomButton(
-                'Update Details',
-                onTap: () {
-                  final form = _formKey.currentState;
-                  if (form != null && form.validate()) {
-                    if (RoomSuite.roomSuite.contains('•') ||
-                        RoomSuite.roomSuite.isEmpty) {
-                      showToast('Choose a correct room number');
-                    } else {
-                      form.save();
-                      collectInfo(
-                        context,
-                        occupantName: RoomSuite.occupantNameController.text,
-                        occupantPhone: RoomSuite.occupantPhoneController.text,
-                        stateOfOrigin: RoomSuite.stateOfOriginController.text,
-                        gender: gender == enums.Gender.male ? 'male' : 'female',
-                        guarantorName: RoomSuite.guarantorNameController.text,
-                        guarantorPhone: RoomSuite.guarantorPhoneController.text,
-                      );
-                    }
-                  } else {
-                    showToast('Wrong data');
-                  }
-                },
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                      'Update Details',
+                      onTap: () {
+                        final form = _formKey.currentState;
+                        if (form != null && form.validate()) {
+                          if (RoomSuite.roomSuite.contains('•') ||
+                              RoomSuite.roomSuite.isEmpty) {
+                            showToast('Choose a correct room number');
+                          } else {
+                            form.save();
+                            collectInfo(
+                              context,
+                              occupantName:
+                                  RoomSuite.occupantNameController.text,
+                              occupantPhone:
+                                  RoomSuite.occupantPhoneController.text,
+                              stateOfOrigin:
+                                  RoomSuite.stateOfOriginController.text,
+                              gender: gender == enums.Gender.male
+                                  ? 'male'
+                                  : 'female',
+                              guarantorName:
+                                  RoomSuite.guarantorNameController.text,
+                              dateOfRentPayment:
+                                  roomInfo.occupant!.dateOfRentPayment,
+                              guarantorPhone:
+                                  RoomSuite.guarantorPhoneController.text,
+                            );
+                          }
+                        } else {
+                          showToast('Wrong data');
+                        }
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => SimpleDialog(
+                        title: Text(
+                          'Are you sure you want to delete the content of this room?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: VictoryColor.primaryColor,
+                          ),
+                        ),
+                        children: [
+                          SvgPicture.asset(
+                            VictoryAssets.icon,
+                            width: 100,
+                            height: 100,
+                            color: VictoryColor.primaryColor,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: CustomButton(
+                              'Proceed',
+                              onTap: () async {
+                                // Navigator.of(context).pop();
+                                removeOccupant(context);
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

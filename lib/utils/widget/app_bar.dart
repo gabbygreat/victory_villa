@@ -20,14 +20,6 @@ AppBar customAppBar({required String title}) {
               style: TextStyle(color: VictoryColor.primaryColor),
             ),
           ),
-          PopupMenuItem<enums.Menu>(
-            value: enums.Menu.itemTwo,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Exit',
-              style: TextStyle(color: VictoryColor.primaryColor),
-            ),
-          ),
         ],
       ),
     ],
